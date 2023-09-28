@@ -12,26 +12,23 @@ import java.util.Date;
 
 @Service
 public class JwtProvider {
-    SecretKey key= Keys.hmacShaKeyFor(JwtConstant.SECRET_kEY.getBytes());
 
-    public String generateToken(Authentication  auth){
-        String jwt= Jwts.builder()
+    SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_kEY.getBytes());
+
+    public String generateToken(Authentication auth) {
+        String jwt = Jwts.builder()
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime()+1000*60*30))
-                .claim("email",auth.getName())
+                .setExpiration(new Date(new Date().getTime() + 1000 * 60 * 30))
+                .claim("email", auth.getName())
                 .signWith(key).compact();
 
         return jwt;
-
     }
 
-
-    public String getEmailFromToken(String jwt){
-        jwt=jwt.substring(7);
-
-        Claims claims=Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-
-        String email=String.valueOf(claims.get("email"));
+    public String getEmailFromToken(String jwt) {
+        jwt = jwt.substring(7);
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+        String email = String.valueOf(claims.get("email"));
         return email;
     }
 }
