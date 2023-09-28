@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Rating {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -28,12 +27,9 @@ public class Rating {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-
     @JoinColumn(name = "rating")
     private double rating;
 
-
     private LocalDateTime createdAt;
-
 
 }
