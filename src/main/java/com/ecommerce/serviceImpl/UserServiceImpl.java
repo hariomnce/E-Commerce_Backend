@@ -21,18 +21,14 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     @Autowired
     UserRepository userRepository;
 
     JwtProvider jwtProvider;
 
-
     @Override
     public User findUserById(Long userId) throws UserException {
-
         Optional<User> user = userRepository.findById(userId);
-
         if (user.isPresent()) {
             return user.get();
         }
@@ -41,12 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
-
         System.out.println("user service");
         String email = jwtProvider.getEmailFromToken(jwt);
         System.out.println("email" + email);
         User user = userRepository.findByEmail(email);
-
         if (user == null) {
             throw new UserException("user not exist with email" + email);
         }
