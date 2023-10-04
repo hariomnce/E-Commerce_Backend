@@ -37,7 +37,11 @@ public class ProductServiceImpl implements ProductService {
     CategoryRepository categoryRepository;
 
     @Override
+<<<<<<< HEAD
+    public Product CreateProduct(CreateProductRequest request) throws ProductException {
+=======
     public Product CreateProduct(CreateProductRequest request) {
+>>>>>>> ad25d3847547a84b5ec9297aae19d8ee3b18469b
         Category topLevel = categoryRepository.findByName(request.getTopLevelCategory());
         if (topLevel == null) {
             Category topLevelCategory = new Category();
@@ -83,9 +87,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+<<<<<<< HEAD
+    public String deleteProduct(Long productId) throws ProductException {
+
+        Product product = findProductById(productId);
+
+        System.out.println("delete product"+product.getId()+"-"+productId);
+=======
     public String deleteProduct(Long productId, Product product1) throws ProductException {
 
         Product product = findProductById(productId);
+>>>>>>> ad25d3847547a84b5ec9297aae19d8ee3b18469b
         product.getSizes().clear();
 
         productRepository.delete(product);
@@ -164,4 +176,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+<<<<<<< HEAD
+    @Override
+    public List<Product> getAllProducts(){
+        return productRepository.findAll();
+    }
+
+
+    @Override
+    public List<Product> findProductByCategory(String category){
+        System.out.println("category---"+category);
+
+        List<Product> products = productRepository.findByCategory(category);
+        return products;
+    }
+
+
+
+=======
+>>>>>>> ad25d3847547a84b5ec9297aae19d8ee3b18469b
 }
