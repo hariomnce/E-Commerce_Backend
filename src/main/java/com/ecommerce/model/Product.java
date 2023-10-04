@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.engine.jdbc.Size;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 @Entity
 @Getter
@@ -19,7 +21,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-
 
 
     @Id
@@ -47,7 +48,8 @@ public class Product {
     @Column(name = "colour")
     private String colour;
 
-
+    @Column(name = "description")
+    private String description;
 
 
     @Embedded
@@ -60,12 +62,12 @@ public class Product {
     private String imageUrl;
 
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Rating>ratings = new ArrayList<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Review>reviews = new ArrayList<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
 
     @Column(name = "num_ratings")
