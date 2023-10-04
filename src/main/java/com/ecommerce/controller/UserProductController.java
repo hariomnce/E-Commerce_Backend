@@ -19,46 +19,36 @@ import java.util.List;
 @RequestMapping("/product")
 public class UserProductController {
 
-
     @Autowired
     ProductService productService;
 
     @GetMapping("/fetch")
     public ResponseEntity<Page<Product>> findProductByCategoryHandler(@RequestParam String category,
-                                                                      @RequestParam List<String>colour,
-                                                                      @RequestParam List <String> size,
+                                                                      @RequestParam List<String> colour,
+                                                                      @RequestParam List<String> size,
                                                                       @RequestParam Integer minPrice,
                                                                       @RequestParam Integer maxPrice,
                                                                       @RequestParam Integer minDiscount,
                                                                       @RequestParam String sort,
                                                                       @RequestParam String stock,
                                                                       @RequestParam Integer pageNumber,
-                                                                      @RequestParam Integer pageSize){
+                                                                      @RequestParam Integer pageSize) {
 
-        Page<Product> res = productService.getAllProduct(category,colour,size,minPrice,maxPrice,minDiscount,sort,stock,pageNumber,
-        pageSize);
-
+        Page<Product> res = productService.getAllProduct(category, colour, size, minPrice, maxPrice, minDiscount, sort, stock, pageNumber,
+                pageSize);
         System.out.println("complete product");
-        return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
-
-
-
 
     @GetMapping("/product/id/{productId}")
-    public ResponseEntity<Product> findProductByIdHandler(@PathVariable Long productId) throws ProductException{
-
+    public ResponseEntity<Product> findProductByIdHandler(@PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
-
-        return new ResponseEntity<>(product,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
     }
-
 
     @GetMapping("/product/search")
-    public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q){
+    public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q) {
         List<Product> products = productService.searchProduct(q);
-        return new ResponseEntity<List<Product>>(products,HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<Product>>(products, HttpStatus.ACCEPTED);
     }
-
-
 }

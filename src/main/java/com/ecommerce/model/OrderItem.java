@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderItem {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,12 +24,8 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
-
-
-
     @ManyToOne
     private Product product;
-
 
     private String size;
 
@@ -43,6 +38,5 @@ public class OrderItem {
     private Long userId;
 
     private LocalDateTime deliveryDate;
-
 
 }
