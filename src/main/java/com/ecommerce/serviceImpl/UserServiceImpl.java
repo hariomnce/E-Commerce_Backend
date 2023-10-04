@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-
-
-
     JwtProvider jwtProvider;
 
     @Override
