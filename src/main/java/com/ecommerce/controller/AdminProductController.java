@@ -21,17 +21,13 @@ import java.util.List;
 @RequestMapping("/api/admin/product")
 public class AdminProductController {
 
-
     @Autowired
     ProductService productService;
 
-
     @PostMapping("/save")
     public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest request) throws ProductException {
-
         Product createProduct = productService.CreateProduct(request);
         return new ResponseEntity<Product>(createProduct, HttpStatus.ACCEPTED);
-
 
     }
 
@@ -39,7 +35,7 @@ public class AdminProductController {
     public ResponseEntity<ApiResponse> deleteProductHandler(@PathVariable Long productId) throws ProductException {
 
         System.out.println("delete product controller....");
-        String msg =    productService.deleteProduct(productId);
+        String msg = productService.deleteProduct(productId);
 
         System.out.println("delete product controller ...msg" + msg);
         ApiResponse response = new ApiResponse(msg, true);
@@ -56,23 +52,19 @@ public class AdminProductController {
     @PutMapping("/{productId}/update")
     public ResponseEntity<Product> updateProductHandler(@RequestBody Product product, @PathVariable Long productId) throws
             ProductException {
-
         Product updatedProduct = productService.updateProduct(productId, product);
         return new ResponseEntity<Product>(updatedProduct, HttpStatus.ACCEPTED);
     }
 
-
     @PostMapping("/creates")
-    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest [] requests) throws
-            ProductException{
+    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] requests) throws
+            ProductException {
 
-
-        for (CreateProductRequest productRequest:requests){
+        for (CreateProductRequest productRequest : requests) {
             productService.CreateProduct(productRequest);
-
         }
-        ApiResponse response = new ApiResponse("product created successfully",true);
-        return new ResponseEntity<ApiResponse>(response,HttpStatus.CREATED);
+        ApiResponse response = new ApiResponse("product created successfully", true);
+        return new ResponseEntity<ApiResponse>(response, HttpStatus.CREATED);
     }
 
 }
