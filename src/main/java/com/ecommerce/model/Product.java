@@ -32,8 +32,8 @@ public class Product {
     @Column(name = "discounted_price")
     private int discountedPrice;
 
-    @Column(name = "discount_persent")
-    private int discountPersent;
+    @Column(name = "discount_present")
+    private int discountPresent;
 
     @Column(name = "quantity")
     private int quantity;
@@ -69,7 +69,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, category, color, description, discountPersent, discountedPrice, id, imageUrl,
+        return Objects.hash(brand, category, color, description, discountPresent, discountedPrice, id, imageUrl,
                 numRatings, price, quantity, ratings, reviews, sizes, title);
     }
 
@@ -84,7 +84,7 @@ public class Product {
         Product other = (Product) obj;
         return Objects.equals(brand, other.brand) && Objects.equals(category, other.category)
                 && Objects.equals(color, other.color) && Objects.equals(description, other.description)
-                && discountPersent == other.discountPersent && discountedPrice == other.discountedPrice
+                && discountPresent == other.discountPresent && discountedPrice == other.discountedPrice
                 && Objects.equals(id, other.id) && Objects.equals(imageUrl, other.imageUrl)
                 && numRatings == other.numRatings && price == other.price && quantity == other.quantity
                 && Objects.equals(ratings, other.ratings) && Objects.equals(reviews, other.reviews)

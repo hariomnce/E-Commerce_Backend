@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setTitle(request.getTitle());
         product.setBrand(request.getBrand());
-        product.setColour(request.getColour());
+        product.setColor(request.getColor());
         product.setDiscountedPrice(request.getDiscountedPrice());
         product.setImageUrl(request.getImageUrl());
         product.setDiscountPresent(request.getDiscountPresent());
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(request.getDescription());
         product.setSizes(request.getSizes());
         product.setCategory(thirdLevel);
-        product.setCreateAt(LocalDateTime.now());
+        product.setCreatedAt(LocalDateTime.now());
         Product savedProduct = productRepository.saveAndFlush(product);
         return savedProduct;
     }
@@ -116,7 +116,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productRepository.filterProduct(category, minPrice, maxPrice, minDiscount, sort);
 
         if (!colors.isEmpty()) {
-            products.stream().filter(p -> colors.stream().anyMatch(c -> c.equalsIgnoreCase(p.getColour())))
+            products.stream().filter(p -> colors.stream().anyMatch(c -> c.equalsIgnoreCase(p.getColor())))
                     .collect(Collectors.toList());
 
         }

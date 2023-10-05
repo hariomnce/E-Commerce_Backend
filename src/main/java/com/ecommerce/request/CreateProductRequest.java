@@ -22,7 +22,7 @@ public class CreateProductRequest {
     private int discountPresent;
     private int quantity;
     private String brand;
-    private String colour;
+    private String color;
     private Set<Size> sizes = new HashSet<>();
     private String imageUrl;
     private String topLevelCategory;
