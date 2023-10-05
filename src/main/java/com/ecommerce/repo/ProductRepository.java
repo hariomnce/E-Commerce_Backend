@@ -11,10 +11,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-
     @Query("SELECT p From Product p where Lower(p.category.name)=:category")
     public List<Product> findByCategory(@Param("category") String category);
-
 
     @Query("SELECT p FROM Product p " +
             "WHERE (:category IS NULL OR p.category.name = :category) " +
@@ -31,10 +29,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                        @Param("sort") String sort
     );
 
-
     @Query("SELECT p FROM Product p WHERE LOWER(p.title) LIKE %:query% OR LOWER(p.description) LIKE %:query% OR LOWER(p.brand) LIKE " +
             "%:query% OR LOWER(p.category.name) LIKE %:query%")
     public List<Product> searchProduct(@Param("query") String query);
-
 
 }

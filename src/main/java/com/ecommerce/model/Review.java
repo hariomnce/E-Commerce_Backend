@@ -22,19 +22,15 @@ public class Review {
 
     private String review;
 
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-
     private LocalDateTime createdAt;
-
 
 }

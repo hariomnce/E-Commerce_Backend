@@ -51,33 +51,26 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-
     @Embedded
     @ElementCollection
     @Column(name = "sizes")
     private Set<Size> sizes = new HashSet<>();
 
-
     @Column(name = "image_url")
     private String imageUrl;
-
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
 
     @Column(name = "num_ratings")
     private int numRatings;
 
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
 
     private LocalDateTime createAt;
 
