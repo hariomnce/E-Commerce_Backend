@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -23,14 +20,29 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "brand")
-    private String brand;
-
-    @Column(name = "colour")
-    private String colour;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "discounted_price")
+    private int discountedPrice;
+
+    @Column(name = "discount_persent")
+    private int discountPersent;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "color")
+    private String color;
 
     @Embedded
     @ElementCollection
@@ -49,10 +61,34 @@ public class Product {
     @Column(name = "num_ratings")
     private int numRatings;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, category, color, description, discountPersent, discountedPrice, id, imageUrl,
+                numRatings, price, quantity, ratings, reviews, sizes, title);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+        return Objects.equals(brand, other.brand) && Objects.equals(category, other.category)
+                && Objects.equals(color, other.color) && Objects.equals(description, other.description)
+                && discountPersent == other.discountPersent && discountedPrice == other.discountedPrice
+                && Objects.equals(id, other.id) && Objects.equals(imageUrl, other.imageUrl)
+                && numRatings == other.numRatings && price == other.price && quantity == other.quantity
+                && Objects.equals(ratings, other.ratings) && Objects.equals(reviews, other.reviews)
+                && Objects.equals(sizes, other.sizes) && Objects.equals(title, other.title);
+    }
 
 }
