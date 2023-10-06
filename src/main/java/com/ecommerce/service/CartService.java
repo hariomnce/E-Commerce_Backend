@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CartService {
 
-
     Cart createCart(User user);
 
     String addCartItem(Long userId, AddItemRequest request) throws ProductException;
