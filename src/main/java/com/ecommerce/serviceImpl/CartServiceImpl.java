@@ -32,6 +32,30 @@ public class CartServiceImpl implements CartService {
         return cartRepository.saveAndFlush(cart);
     }
 
+
+    @Override
+    public Cart findUserCart(Long userID){
+        Cart cart = cartRepository.findByUserId(userID);
+        int totalPrice = 0;
+        int totalDiscountPrice = 0;
+        int totalItem=0;
+        for (CartItem cartItem : cart.getCartItems()){
+            totalPrice+= cartItem.getPrice();
+            totalDiscountPrice+=cartItem.getDiscountedPrice();
+            totalItem+=cartItem.getQuantity();
+        }
+
+        cart.setTotalPrice(totalPrice);
+        cart.setTotalItem(cart.getCartItems().size());
+        cart.setTotalDiscountPrice(totalDiscountPrice);
+        cart.setDiscount(totalPrice-totalDiscountPrice);
+        cart.setTotalItem(totalItem);
+
+        return cartRepository.saveAndFlush(cart);
+    }
+
+
+
     @Override
     public String addCartItem(Long userId, AddItemRequest request) throws ProductException {
         Cart cart = cartRepository.findByUserId(userId);

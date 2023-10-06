@@ -24,7 +24,7 @@ public class AdminProductController {
     @Autowired
     ProductService productService;
 
-    @PostMapping("/save")
+    @PostMapping("/")
     public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest request) throws ProductException {
         Product createProduct = productService.CreateProduct(request);
         return new ResponseEntity<Product>(createProduct, HttpStatus.ACCEPTED);

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,6 +50,9 @@ public class AuthController {
         String passWord = user.getPassword();
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
+        String mobile=user.getMobile();
+        LocalDateTime localDateTime= user.getCreatedAt();
+
 
         User isEmailExist = userRepository.findByEmail(email);
         if (isEmailExist != null) {
@@ -60,6 +65,8 @@ public class AuthController {
         createdUser.setEmail(email);
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
+        createdUser.setMobile(mobile);
+        createdUser.setCreatedAt(LocalDateTime.now());
         createdUser.setPassword(passwordEncoder.encode(passWord));
         User savedUser = userRepository.save(createdUser);
 
