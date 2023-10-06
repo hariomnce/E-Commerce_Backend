@@ -31,11 +31,9 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
-
         cartItem.setQuantity(1);
         cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
-        cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice()* cartItem.getQuantity());
-
+        cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() * cartItem.getQuantity());
         return cartItemRepository.saveAndFlush(cartItem);
     }
 
@@ -44,56 +42,38 @@ public class CartItemServiceImpl implements CartItemService {
         CartItem item = findCartItemById(id);
         User user = userService.findUserById(item.getUserId());
 
-        if (user.getId().equals(userId)){
+        if (user.getId().equals(userId)) {
             item.setQuantity(cartItem.getQuantity());
-            item.setPrice(item.getQuantity()*item.getProduct().getPrice());
-            item.setDiscountedPrice(item.getProduct().getDiscountedPrice()*item.getQuantity());
-
+            item.setPrice(item.getQuantity() * item.getProduct().getPrice());
+            item.setDiscountedPrice(item.getProduct().getDiscountedPrice() * item.getQuantity());
             return cartItemRepository.saveAndFlush(item);
-        }
-
-        else {
+        } else {
             throw new CartItemException("you can't update another user cart_item");
         }
-
-
     }
 
     @Override
-    public CartItem isCartItemExist(Cart cart, Product product, String size, Long userId){
-
-        return cartItemRepository.isCartItemExist(cart, product, size , userId);
+    public CartItem isCartItemExist(Cart cart, Product product, String size, Long userId) {
+        return cartItemRepository.isCartItemExist(cart, product, size, userId);
     }
 
-
     @Override
-    public void removeCartItem(Long userId, Long cartItemId) throws CartItemException,UserException{
+    public void removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException {
         CartItem cartItem = findCartItemById(cartItemId);
-
         User user = userService.findUserById(cartItem.getUserId());
-
-        User reqUser= userService.findUserById(userId);
-
-        if (user.getId().equals(reqUser.getId())){
+        User reqUser = userService.findUserById(userId);
+        if (user.getId().equals(reqUser.getId())) {
             cartItemRepository.deleteById(cartItemId);
-        }
-        else {
+        } else {
             throw new UserException("you can't remove another item");
         }
     }
 
-
-
     private CartItem findCartItemById(Long cartItemId) throws CartItemException {
         Optional<CartItem> opt = cartItemRepository.findById(cartItemId);
-
-
-        if (opt.isPresent()){
+        if (opt.isPresent()) {
             return opt.get();
         }
-
-        throw new CartItemException("cart item not found with id :"+cartItemId);
-
-
+        throw new CartItemException("cart item not found with id :" + cartItemId);
     }
 }
