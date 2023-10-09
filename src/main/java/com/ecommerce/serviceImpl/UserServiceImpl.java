@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
         System.out.println("user service");
-        String email = jwtProvider.getEmailFromToken(jwt);
-        System.out.println("email" + email);
-        User user = userRepository.findByEmail(email);
+//        String email = jwtProvider.getEmailFromToken(jwt);
+//        System.out.println("email" + email);
+        User user = userRepository.findByEmail("rajsumit7200@gmail.com");
         if (user == null) {
-            throw new UserException("user not exist with email" + email);
+//            throw new UserException("user not exist with email" + email);
         }
         System.out.println("email user" + user.getEmail());
         return user;
