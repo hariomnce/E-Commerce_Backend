@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(thirdLevel);
         product.setCreatedAt(LocalDateTime.now());
 
-        Product savedProduct = productRepository.save(product);
+        Product savedProduct = productRepository.saveAndFlush(product);
         System.out.println("products - "+product);
         return savedProduct;
 

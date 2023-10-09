@@ -24,7 +24,7 @@ public class UserProductController {
 
     @GetMapping("/fetch")
     public ResponseEntity<Page<Product>> findProductByCategoryHandler(@RequestParam String category,
-                                                                      @RequestParam List<String> colour,
+                                                                      @RequestParam List<String> color,
                                                                       @RequestParam List<String> size,
                                                                       @RequestParam Integer minPrice,
                                                                       @RequestParam Integer maxPrice,
@@ -34,7 +34,7 @@ public class UserProductController {
                                                                       @RequestParam Integer pageNumber,
                                                                       @RequestParam Integer pageSize) {
 
-        Page<Product> res = productService.getAllProduct(category, colour, size, minPrice, maxPrice, minDiscount, sort, stock, pageNumber,
+        Page<Product> res = productService.getAllProduct(category, color, size, minPrice, maxPrice, minDiscount, sort, stock, pageNumber,
                 pageSize);
         System.out.println("complete product");
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);

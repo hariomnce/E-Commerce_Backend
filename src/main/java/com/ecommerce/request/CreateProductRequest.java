@@ -1,18 +1,12 @@
 package com.ecommerce.request;
 
 import com.ecommerce.model.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class CreateProductRequest {
 
     private String title;
