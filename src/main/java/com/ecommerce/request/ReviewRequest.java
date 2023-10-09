@@ -12,6 +12,5 @@ import lombok.Setter;
 public class ReviewRequest {
 
     private Long productId;
-
     private String review;
 }

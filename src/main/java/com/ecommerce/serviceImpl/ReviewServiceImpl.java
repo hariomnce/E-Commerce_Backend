@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
-
     @Autowired
     ReviewRepository reviewRepository;
 
@@ -28,27 +27,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     ProductRepository productRepository;
 
-
     @Override
-    public Review createReview(ReviewRequest reviewRequest, User user) throws ProductException{
+    public Review createReview(ReviewRequest reviewRequest, User user) throws ProductException {
         Product product = productService.findProductById(reviewRequest.getProductId());
-
         Review review = new Review();
         review.setUser(user);
         review.setProduct(product);
         review.setReview(reviewRequest.getReview());
         review.setCreatedAt(LocalDateTime.now());
-
         return reviewRepository.saveAndFlush(review);
     }
 
     @Override
-    public List<Review> getAllReview(Long productId){
+    public List<Review> getAllReview(Long productId) {
         return reviewRepository.getAllProductReview(productId);
     }
-
-
-
-
 
 }

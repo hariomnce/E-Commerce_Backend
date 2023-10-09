@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public interface RatingService {
 
-
     Rating createRating(Rating rating, User user) throws ProductException;
 
     List<Rating> getProductRating(Long productId);
