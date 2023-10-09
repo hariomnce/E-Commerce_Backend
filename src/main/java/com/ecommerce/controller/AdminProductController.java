@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @NoArgsConstructor
 @AllArgsConstructor
-@RequestMapping("/api/admin/product")
+@RequestMapping("/api/admin/products")
 public class AdminProductController {
 
     @Autowired
@@ -30,14 +30,17 @@ public class AdminProductController {
 
     @Autowired
     UserService userService;
+
     @PostMapping("/")
-    public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest request) throws ProductException {
-        Product createProduct = productService.CreateProduct(request);
-        return new ResponseEntity<Product>(createProduct, HttpStatus.ACCEPTED);
+    public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest req) throws ProductException{
+
+        Product createdProduct = productService.CreateProduct(req);
+
+        return new ResponseEntity<Product>(createdProduct,HttpStatus.CREATED);
 
     }
 
-    @DeleteMapping("/{productId}/delete")
+    @DeleteMapping("/delete/{productId}")
     public ResponseEntity<ApiResponse> deleteProductHandler(@PathVariable Long productId) throws ProductException {
 
         System.out.println("delete product controller....");
@@ -62,6 +65,19 @@ public class AdminProductController {
         return new ResponseEntity<Product>(updatedProduct, HttpStatus.ACCEPTED);
     }
 
+
+//    @PostMapping("/creates")
+//    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] reqs) throws ProductException{
+//
+//        for(CreateProductRequest product:reqs) {
+//            productService.CreateProduct(product);
+//        }
+//
+//        ApiResponse res=new ApiResponse("products created successfully",true);
+//        return new ResponseEntity<ApiResponse>(res,HttpStatus.ACCEPTED);
+//    }
+
+
     @PostMapping("/creates")
     public ResponseEntity<List<Product>> createMultipleProduct(@RequestBody List<CreateProductRequest> requests) throws
             ProductException {
@@ -74,19 +90,7 @@ public class AdminProductController {
         return new ResponseEntity<List<Product>>(productList, HttpStatus.CREATED);
     }
 
-    @GetMapping("/profiles")
-    public String getUserProfileHandlerNew() {
-        return "tested";
-    }
 
-    @GetMapping("/profileNew")
-    public ResponseEntity<User> getUserProfileHandler(@RequestHeader("Authorization") String authorization) throws UserException {
-
-        System.out.println("api/user/profile");
-        User user = userService.findUserProfileByJwt(authorization);
-        return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
-
-    }
 
 }
 

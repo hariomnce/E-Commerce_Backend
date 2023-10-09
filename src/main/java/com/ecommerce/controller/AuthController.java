@@ -6,6 +6,7 @@ import com.ecommerce.model.User;
 import com.ecommerce.repo.UserRepository;
 import com.ecommerce.request.LoginRequest;
 import com.ecommerce.response.AuthResponse;
+import com.ecommerce.service.UserService;
 import com.ecommerce.serviceImpl.CustomUserDetails;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,9 @@ public class AuthController {
     @Autowired
     private CustomUserDetails customUserDetails;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException {
         String email = user.getEmail();
@@ -69,6 +73,7 @@ public class AuthController {
         createdUser.setCreatedAt(LocalDateTime.now());
         createdUser.setPassword(passwordEncoder.encode(passWord));
         User savedUser = userRepository.save(createdUser);
+
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, passWord);
         SecurityContextHolder.getContext().setAuthentication(authentication);
