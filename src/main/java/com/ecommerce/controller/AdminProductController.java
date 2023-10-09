@@ -2,10 +2,13 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.exception.ProductException;
+import com.ecommerce.exception.UserException;
 import com.ecommerce.model.Product;
+import com.ecommerce.model.User;
 import com.ecommerce.request.CreateProductRequest;
 import com.ecommerce.response.ApiResponse;
 import com.ecommerce.service.ProductService;
+import com.ecommerce.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,6 +28,8 @@ public class AdminProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    UserService userService;
     @PostMapping("/")
     public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest request) throws ProductException {
         Product createProduct = productService.CreateProduct(request);
@@ -57,14 +63,29 @@ public class AdminProductController {
     }
 
     @PostMapping("/creates")
-    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] requests) throws
+    public ResponseEntity<List<Product>> createMultipleProduct(@RequestBody List<CreateProductRequest> requests) throws
             ProductException {
-
+        List<Product> productList = new ArrayList<>();
         for (CreateProductRequest productRequest : requests) {
-            productService.CreateProduct(productRequest);
+            Product product = productService.CreateProduct(productRequest);
+            productList.add(product);
         }
         ApiResponse response = new ApiResponse("product created successfully", true);
-        return new ResponseEntity<ApiResponse>(response, HttpStatus.CREATED);
+        return new ResponseEntity<List<Product>>(productList, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/profiles")
+    public String getUserProfileHandlerNew() {
+        return "tested";
+    }
+
+    @GetMapping("/profileNew")
+    public ResponseEntity<User> getUserProfileHandler(@RequestHeader("Authorization") String authorization) throws UserException {
+
+        System.out.println("api/user/profile");
+        User user = userService.findUserProfileByJwt(authorization);
+        return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
+
     }
 
 }

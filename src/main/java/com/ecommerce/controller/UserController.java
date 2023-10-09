@@ -20,10 +20,10 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public ResponseEntity<User> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
+    public ResponseEntity<User> getUserProfileHandler(@RequestHeader("authorization") String authorization) throws UserException {
 
         System.out.println("api/user/profile");
-        User user = userService.findUserProfileByJwt(jwt);
+        User user = userService.findUserProfileByJwt(authorization);
         return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
 
     }
