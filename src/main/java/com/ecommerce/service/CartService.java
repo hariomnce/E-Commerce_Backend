@@ -11,5 +11,7 @@ public interface CartService {
 
     Cart createCart(User user);
 
+    Cart findUserCart(Long userID);
+
     String addCartItem(Long userId, AddItemRequest request) throws ProductException;
 }

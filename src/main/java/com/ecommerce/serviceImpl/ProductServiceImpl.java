@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
 
-    public Product CreateProduct(CreateProductRequest request) throws ProductException {
+    public Product CreateProduct(CreateProductRequest request)  {
         Category topLevel = categoryRepository.findByName(request.getTopLevelCategory());
         if (topLevel == null) {
             Category topLevelCategory = new Category();
@@ -78,8 +78,11 @@ public class ProductServiceImpl implements ProductService {
         product.setSizes(request.getSizes());
         product.setCategory(thirdLevel);
         product.setCreatedAt(LocalDateTime.now());
-        Product savedProduct = productRepository.saveAndFlush(product);
+
+        Product savedProduct = productRepository.save(product);
+        System.out.println("products - "+product);
         return savedProduct;
+
     }
 
     @Override
