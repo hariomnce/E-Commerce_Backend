@@ -2,8 +2,6 @@ package com.ecommerce.user;
 
 public enum ProductColour {
 
-
-
     BLACK,
     WHITE,
     RED,

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public interface ReviewService {
+
     Review createReview(ReviewRequest reviewRequest, User user) throws ProductException;
 
     List<Review> getAllReview(Long productId);
