@@ -3,8 +3,7 @@ package com.ecommerce.controller;
 import com.ecommerce.exception.ProductException;
 import com.ecommerce.model.Product;
 import com.ecommerce.service.ProductService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
+@Data
 @RestController
-@NoArgsConstructor
-@AllArgsConstructor
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class UserProductController {
 
     @Autowired
@@ -38,10 +36,10 @@ public class UserProductController {
         Page<Product> res = productService.getAllProduct(category, color, size, minPrice, maxPrice, minDiscount, sort, stock, pageNumber,
                 pageSize);
         System.out.println("complete product");
-        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @GetMapping("/product/id/{productId}")
+    @GetMapping("/product/{productId}")
     public ResponseEntity<Product> findProductByIdHandler(@PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
         return new ResponseEntity<>(product, HttpStatus.ACCEPTED);

@@ -1,21 +1,19 @@
 package com.ecommerce.model;
 
+import com.ecommerce.user.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "users")
 public class User {
 
@@ -29,7 +27,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "password")
+    @NotEmpty
+//    @Size(min = 6, message = "Password must be minimum of 6 characters!!!")
+//    @Pattern(regexp = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@%#$]).{8,20})", message = "password must be at least 6 characters containing one Uppercase letter, one Lowercase letter, " + "Special character and one Number")
     private String password;
 
     @Column(name = "email")

@@ -9,8 +9,9 @@ import com.ecommerce.request.CreateProductRequest;
 import com.ecommerce.response.ApiResponse;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
+import lombok.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
+@Data
 @RestController
-@NoArgsConstructor
-@AllArgsConstructor
 @RequestMapping("/api/admin/products")
 public class AdminProductController {
 

@@ -10,7 +10,9 @@ import com.ecommerce.response.ApiResponse;
 import com.ecommerce.service.CartService;
 import com.ecommerce.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +22,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Data
 @RestController
-@NoArgsConstructor
-@AllArgsConstructor
 @RequestMapping("/api/cart")
 public class CartController {
 
-    private CartService cartService;
-    private UserService userService;
+
+    @Autowired
+    CartService cartService;
+    @Autowired
+    UserService userService;
 
 
     @GetMapping("/")

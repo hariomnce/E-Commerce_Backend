@@ -9,8 +9,9 @@ import com.ecommerce.response.AuthResponse;
 import com.ecommerce.service.UserService;
 import com.ecommerce.serviceImpl.CustomUserDetails;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
+import lombok.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,26 +26,25 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @CrossOrigin
+@Data
 @RestController
-@NoArgsConstructor
-@AllArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtProvider jwtProvider;
+    JwtProvider jwtProvider;
 
     @Autowired
-    private CustomUserDetails customUserDetails;
+    CustomUserDetails customUserDetails;
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException {
@@ -52,8 +52,8 @@ public class AuthController {
         String passWord = user.getPassword();
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
-        String mobile=user.getMobile();
-        LocalDateTime localDateTime= user.getCreatedAt();
+        String mobile = user.getMobile();
+        LocalDateTime localDateTime = user.getCreatedAt();
 
 
         User isEmailExist = userRepository.findByEmail(email);
@@ -76,7 +76,7 @@ public class AuthController {
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, passWord);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
-        AuthResponse authResponse = new AuthResponse(token, "signup Success");
+        AuthResponse authResponse = new AuthResponse(token, "Signup Success");
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }
 

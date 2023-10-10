@@ -14,7 +14,9 @@ public interface ProductService {
 
 
     //only for Admin
-    Product CreateProduct(CreateProductRequest request) throws ProductException;
+
+
+    Product CreateProduct(CreateProductRequest request);
 
     String deleteProduct(Long productId) throws ProductException;
 

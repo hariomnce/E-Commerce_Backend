@@ -5,19 +5,13 @@ import com.ecommerce.exception.UserException;
 import com.ecommerce.model.User;
 import com.ecommerce.repo.UserRepository;
 import com.ecommerce.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -44,7 +38,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
 
         if (user==null){
-            throw new UserException("user nor exist with email"+email);
+            throw new UserException("user not exist with email"+email);
         }
         System.out.println("email user"+user.getEmail());
         return user;
