@@ -61,7 +61,7 @@ public class Product {
     @Column(name = "num_ratings")
     private int numRatings;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 

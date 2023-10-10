@@ -39,31 +39,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
 
     public Product CreateProduct(CreateProductRequest request)  {
-        Category topLevel = categoryRepository.findByName(request.getTopLevelCategory());
-        if (topLevel == null) {
-            Category topLevelCategory = new Category();
-            topLevelCategory.setName(request.getTopLevelCategory());
-            topLevelCategory.setLevel(1);
-            topLevel = categoryRepository.saveAndFlush(topLevelCategory);
-        }
+        Category topLevelCategory = new Category();
+        topLevelCategory.setName(request.getTopLevelCategory());
+        topLevelCategory.setLevel(1);
+        Category topLevel = categoryRepository.saveAndFlush(topLevelCategory);
 
-        Category secondLevel = categoryRepository.findByNameAndParent(request.getSecondLevelCategory(), topLevel.getName());
-        if (secondLevel == null) {
-            Category secondLevelCategory = new Category();
-            secondLevelCategory.setName(request.getSecondLevelCategory());
-            secondLevelCategory.setParentCategory(topLevel);
-            secondLevelCategory.setLevel(2);
-            secondLevel = categoryRepository.saveAndFlush(secondLevelCategory);
-        }
+        Category secondLevelCategory = new Category();
+        secondLevelCategory.setName(request.getSecondLevelCategory());
+        secondLevelCategory.setParentCategory(topLevel);
+        secondLevelCategory.setLevel(2);
+        Category secondLevel = categoryRepository.saveAndFlush(secondLevelCategory);
 
-        Category thirdLevel = categoryRepository.findByNameAndParent(request.getThirdLevelCategory(), secondLevel.getName());
-        if (thirdLevel == null) {
-            Category thirdLevelCategory = new Category();
-            thirdLevelCategory.setName(request.getThirdLevelCategory());
-            thirdLevelCategory.setParentCategory(secondLevel);
-            thirdLevelCategory.setLevel(3);
-            thirdLevel = categoryRepository.saveAndFlush(thirdLevelCategory);
-        }
+
+        Category thirdLevelCategory = new Category();
+        thirdLevelCategory.setName(request.getThirdLevelCategory());
+        thirdLevelCategory.setParentCategory(secondLevel);
+        thirdLevelCategory.setLevel(3);
+        Category  thirdLevel = categoryRepository.saveAndFlush(thirdLevelCategory);
 
         Product product = new Product();
         product.setTitle(request.getTitle());
