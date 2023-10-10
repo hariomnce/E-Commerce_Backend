@@ -30,7 +30,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Name must not be null")
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
