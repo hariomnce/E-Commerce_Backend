@@ -8,8 +8,9 @@ import com.ecommerce.repo.ProductRepository;
 import com.ecommerce.repo.UserRepository;
 import com.ecommerce.request.CreateProductRequest;
 import com.ecommerce.service.ProductService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
+import lombok.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,8 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -37,8 +37,7 @@ public class ProductServiceImpl implements ProductService {
     CategoryRepository categoryRepository;
 
     @Override
-
-    public Product CreateProduct(CreateProductRequest request)  {
+    public Product CreateProduct(CreateProductRequest request) {
         Category topLevelCategory = new Category();
         topLevelCategory.setName(request.getTopLevelCategory());
         topLevelCategory.setLevel(1);
@@ -55,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
         thirdLevelCategory.setName(request.getThirdLevelCategory());
         thirdLevelCategory.setParentCategory(secondLevel);
         thirdLevelCategory.setLevel(3);
-        Category  thirdLevel = categoryRepository.saveAndFlush(thirdLevelCategory);
+        Category thirdLevel = categoryRepository.saveAndFlush(thirdLevelCategory);
 
         Product product = new Product();
         product.setTitle(request.getTitle());
@@ -72,9 +71,8 @@ public class ProductServiceImpl implements ProductService {
         product.setCreatedAt(LocalDateTime.now());
 
         Product savedProduct = productRepository.saveAndFlush(product);
-        System.out.println("products - "+product);
+        System.out.println("products - " + product);
         return savedProduct;
-
     }
 
     @Override

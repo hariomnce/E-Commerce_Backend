@@ -16,7 +16,7 @@ import java.util.List;
 public class CustomUserDetails implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     public CustomUserDetails(UserRepository userRepository) {
         this.userRepository = userRepository;
