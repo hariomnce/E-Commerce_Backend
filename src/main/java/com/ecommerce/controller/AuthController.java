@@ -2,10 +2,12 @@ package com.ecommerce.controller;
 
 import com.ecommerce.config.JwtProvider;
 import com.ecommerce.exception.UserException;
+import com.ecommerce.model.Cart;
 import com.ecommerce.model.User;
 import com.ecommerce.repo.UserRepository;
 import com.ecommerce.request.LoginRequest;
 import com.ecommerce.response.AuthResponse;
+import com.ecommerce.service.CartService;
 import com.ecommerce.service.UserService;
 import com.ecommerce.serviceImpl.CustomUserDetails;
 import jakarta.validation.Valid;
@@ -46,6 +48,9 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CartService cartService;
+
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException {
         String email = user.getEmail();
@@ -69,6 +74,8 @@ public class AuthController {
         createdUser.setCreatedAt(LocalDateTime.now());
         createdUser.setPassword(passwordEncoder.encode(passWord));
         User savedUser = userRepository.save(createdUser);
+
+        Cart cart = cartService.createCart(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, passWord);
         SecurityContextHolder.getContext().setAuthentication(authentication);
