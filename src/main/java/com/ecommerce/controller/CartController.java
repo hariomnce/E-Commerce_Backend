@@ -27,12 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/cart")
 public class CartController {
 
-
     @Autowired
     CartService cartService;
+
     @Autowired
     UserService userService;
-
 
     @GetMapping("/")
     public ResponseEntity<Cart> findUserCartHandler(@RequestHeader("Authorization") String jwt) throws UserException {
