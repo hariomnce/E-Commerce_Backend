@@ -49,21 +49,21 @@ public class AdminProductController {
 
         System.out.println("delete product controller ...msg" + msg);
         ApiResponse response = new ApiResponse(msg, true);
-        return new ResponseEntity<ApiResponse>(response, HttpStatus.ACCEPTED);
+        return new ResponseEntity<ApiResponse>(response, HttpStatus.CREATED);
 
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Product>> findAllProduct() {
         List<Product> products = productService.getAllProducts();
-        return new ResponseEntity<List<Product>>(products, HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<Product>>(products, HttpStatus.CREATED);
     }
 
     @PutMapping("/{productId}/update")
     public ResponseEntity<Product> updateProductHandler(@RequestBody Product product, @PathVariable Long productId) throws
             ProductException {
         Product updatedProduct = productService.updateProduct(productId, product);
-        return new ResponseEntity<Product>(updatedProduct, HttpStatus.ACCEPTED);
+        return new ResponseEntity<Product>(updatedProduct, HttpStatus.CREATED);
     }
 
 
