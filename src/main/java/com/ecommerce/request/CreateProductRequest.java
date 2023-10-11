@@ -20,12 +20,10 @@ public class CreateProductRequest {
     private String color;
     private Set<Size> sizes = new HashSet<>();
     private String imageUrl;
-
     private String topLevelCategory;
     private String secondLevelCategory;
     private String thirdLevelCategory;
-
-    //private String parentCategory;
+//  private String parentCategory;
 
 
 }
