@@ -55,11 +55,9 @@ public class AuthController {
         String mobile = user.getMobile();
         LocalDateTime localDateTime = user.getCreatedAt();
 
-
         User isEmailExist = userRepository.findByEmail(email);
         if (isEmailExist != null) {
             throw new UserException("Email is Already used with another account ");
-
         }
 
         //create New User
@@ -72,7 +70,6 @@ public class AuthController {
         createdUser.setPassword(passwordEncoder.encode(passWord));
         User savedUser = userRepository.save(createdUser);
 
-
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, passWord);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
@@ -84,7 +81,6 @@ public class AuthController {
     public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) {
         String userName = loginRequest.getEmail();
         String passWord = loginRequest.getPassword();
-
         System.out.println(userName + "-----" + passWord);
 
         Authentication authentication = authenticate(userName, passWord);

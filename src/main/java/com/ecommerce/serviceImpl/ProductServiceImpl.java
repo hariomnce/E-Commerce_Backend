@@ -49,7 +49,6 @@ public class ProductServiceImpl implements ProductService {
         secondLevelCategory.setLevel(2);
         Category secondLevel = categoryRepository.saveAndFlush(secondLevelCategory);
 
-
         Category thirdLevelCategory = new Category();
         thirdLevelCategory.setName(request.getThirdLevelCategory());
         thirdLevelCategory.setParentCategory(secondLevel);
