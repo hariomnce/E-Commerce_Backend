@@ -14,12 +14,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p From Product p where Lower(p.category.name)=:category")
     public List<Product> findByCategory(@Param("category") String category);
 
-
     @Query("SELECT p FROM Product p WHERE LOWER(p.title) LIKE %:query% OR LOWER(p.description) LIKE %:query% OR LOWER(p.brand) LIKE " +
             "%:query% OR LOWER(p.category.name) LIKE %:query%")
     public List<Product> searchProduct(@Param("query") String query);
-
-
 
     @Query("SELECT p FROM Product p " +
             "WHERE (p.category.name = :category OR :category = '') " +
@@ -35,7 +32,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("minDiscount") Integer minDiscount,
             @Param("sort") String sort
     );
-
-
 
 }

@@ -33,18 +33,18 @@ public class AdminProductController {
     UserService userService;
 
     @PostMapping("/")
-    public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest req) throws ProductException{
+    public ResponseEntity<Product> createProductHandler(@RequestBody CreateProductRequest req) throws ProductException {
 
         Product createdProduct = productService.CreateProduct(req);
 
-        return new ResponseEntity<Product>(createdProduct,HttpStatus.CREATED);
+        return new ResponseEntity<Product>(createdProduct, HttpStatus.CREATED);
 
     }
 
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity<ApiResponse> deleteProductHandler(@PathVariable Long productId) throws ProductException {
 
-      //  System.out.println("delete product controller....");
+        //  System.out.println("delete product controller....");
         String msg = productService.deleteProduct(productId);
 
         System.out.println("delete product controller ...msg" + msg);
@@ -65,7 +65,6 @@ public class AdminProductController {
         Product updatedProduct = productService.updateProduct(productId, product);
         return new ResponseEntity<Product>(updatedProduct, HttpStatus.CREATED);
     }
-
 
 //    @PostMapping("/creates")
 //    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] reqs) throws ProductException{
@@ -90,8 +89,6 @@ public class AdminProductController {
         ApiResponse response = new ApiResponse("product created successfully", true);
         return new ResponseEntity<List<Product>>(productList, HttpStatus.CREATED);
     }
-
-
 
 }
 
