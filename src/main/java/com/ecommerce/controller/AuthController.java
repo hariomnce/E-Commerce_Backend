@@ -74,7 +74,6 @@ public class AuthController {
         createdUser.setCreatedAt(LocalDateTime.now());
         createdUser.setPassword(passwordEncoder.encode(passWord));
         User savedUser = userRepository.save(createdUser);
-
         Cart cart = cartService.createCart(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, passWord);
