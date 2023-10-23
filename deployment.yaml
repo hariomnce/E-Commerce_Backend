@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: springboot-container
-          image: savitsharma/ecom:latest
+          image: savitsharma/ecom.jar:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
