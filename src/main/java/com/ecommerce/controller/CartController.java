@@ -9,9 +9,9 @@ import com.ecommerce.request.AddItemRequest;
 import com.ecommerce.response.ApiResponse;
 import com.ecommerce.service.CartService;
 import com.ecommerce.service.UserService;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,9 @@ public class CartController {
     }
 
     @PutMapping("/add")
-    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest req, @RequestHeader("Authorization") String jwt) throws UserException, ProductException {
+    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest req, @RequestHeader("Authorization") String jwt)
+            throws UserException, ProductException {
+
         User user = userService.findUserProfileByJwt(jwt);
         cartService.addCartItem(user.getId(), req);
         ApiResponse res = new ApiResponse("Item Added To Cart Successfully", true);
