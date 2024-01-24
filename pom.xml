@@ -98,7 +98,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>ecom</finalName>
+        <finalName>e-commerce</finalName>
     </build>
 
 </project>
