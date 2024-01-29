@@ -1,7 +1,5 @@
 package com.ecommerce.controller;
 
-
-import com.ecommerce.exception.ProductException;
 import com.ecommerce.exception.UserException;
 import com.ecommerce.model.Cart;
 import com.ecommerce.model.User;
@@ -37,14 +35,6 @@ public class CartController {
         return new ResponseEntity<Cart>(cart, HttpStatus.OK);
     }
 
-    @PutMapping("/add")
-    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest req, @RequestHeader("Authorization") String jwt)
-            throws UserException, ProductException {
 
-        User user = userService.findUserProfileByJwt(jwt);
-        cartService.addCartItem(user.getId(), req);
-        ApiResponse res = new ApiResponse("Item Added To Cart Successfully", true);
-        return new ResponseEntity<ApiResponse>(res, HttpStatus.ACCEPTED);
-    }
 }
 
